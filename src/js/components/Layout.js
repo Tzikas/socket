@@ -36,7 +36,7 @@ export  class Layout extends React.Component{
 		super(props)
 			const {dispatch} = this.props
 			//    dispatch(loadInitialData())
-			socket = io.connect("http://localhost:3000")
+			socket = io.connect()
 			//socket = io.connect("mongodb://nikonikonikoniko:Canela8!@ds155091.mlab.com:55091/yoooo")
 			
 			console.dir(socket)

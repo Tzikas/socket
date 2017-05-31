@@ -26,7 +26,7 @@ db.once('open', () => {
 var serve = http.createServer(app);
 var io = socketServer(serve);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 console.log( ' process.env.PORT ');
 console.log( process.env.PORT ) 
 console.log( port ) 

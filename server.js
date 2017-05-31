@@ -26,7 +26,11 @@ db.once('open', () => {
 var serve = http.createServer(app);
 var io = socketServer(serve);
 
-var port = process.env.port || 3000;
+var port = process.env.PORT || 3000;
+console.log( ' process.env.PORT ');
+console.log( process.env.PORT ) 
+console.log( port ) 
+
 
 
 serve.listen(port,()=> {console.log("+++Gethyl Express Server with Socket Running!!!")})

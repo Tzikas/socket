@@ -15,7 +15,8 @@ app.use(bodyParser.json())
 
 // MONGOOSE CONNECT - to change the local port for Heroku
 // ===========================================================================
-mongoose.connect('mongodb://localhost:27017/local')
+//mongoose.connect('mongodb://localhost:27017/local')
+mongoose.connect('mongodb://nikonikonikoniko:Canela8!@ds155091.mlab.com:55091/yoooo')
 
 var db = mongoose.connection
 db.on('error', ()=> {console.log( '---Gethyl FAILED to connect to mongoose')})

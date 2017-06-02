@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const autoIncrement = require('mongoose-auto-increment')
 const http = require('http')
 const socketServer =require('socket.io')
+const path = require('path')
 
 const app = express();
 
@@ -12,37 +13,26 @@ const todoModel = require('./models/todoModel')  //todo model
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 
-// MONGOOSE CONNECT
+// MONGOOSE CONNECT - to change the local port for Heroku
 // ===========================================================================
-//mongoose.connect('mongodb://localhost:27017/todos')
-mongoose.connect('mongodb://nikonikonikoniko:Canela8!@ds155091.mlab.com:55091/yoooo')
+mongoose.connect('mongodb://localhost:27017/local')
 
 var db = mongoose.connection
 db.on('error', ()=> {console.log( '---Gethyl FAILED to connect to mongoose')})
 db.once('open', () => {
-	console.log( '+++Gethyl connected to mongoose')
+	console.log( '+++Gethyl connected to mongoose+++')
 })
 
 var serve = http.createServer(app);
 var io = socketServer(serve);
-
-var port = process.env.PORT || 8080;
-console.log( ' process.env.PORT ');
-console.log( process.env.PORT ) 
-console.log( port ) 
-
-
-
-serve.listen(port,()=> {console.log("+++Gethyl Express Server with Socket Running!!!")})
-//serve.listen("mongodb://nikonikonikoniko:Canela8!@ds155091.mlab.com:55091/yoooo",()=> {console.log("mongodb://nikonikonikoniko:Canela8!@ds155091.mlab.com:55091/yoooo")})
-
+const port = process.env.PORT || 3000
+serve.listen(port,()=> {console.log(`+++Gethyl Express Server with Socket Running on ${port}!!!`)})
 
 const indexPath = path.join(__dirname, './index.html')
 const distPath = express.static(path.join(__dirname, './dist'))
 
 app.use('/dist', distPath)
-app.get('/', function (req, res) { res.sendFile(indexPath) }) 
-
+app.get('/', function (req, res) { res.sendFile(indexPath) })
 /***************************************************************************************** */
 /* Socket logic starts here																   */
 /***************************************************************************************** */
@@ -104,3 +94,4 @@ io.on('connection', function (socket) {
 	})
 	
 });
+

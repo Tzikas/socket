@@ -37,6 +37,12 @@ serve.listen(port,()=> {console.log("+++Gethyl Express Server with Socket Runnin
 //serve.listen("mongodb://nikonikonikoniko:Canela8!@ds155091.mlab.com:55091/yoooo",()=> {console.log("mongodb://nikonikonikoniko:Canela8!@ds155091.mlab.com:55091/yoooo")})
 
 
+const indexPath = path.join(__dirname, './index.html')
+const distPath = express.static(path.join(__dirname, './dist'))
+
+app.use('/dist', distPath)
+app.get('/', function (req, res) { res.sendFile(indexPath) }) 
+
 /***************************************************************************************** */
 /* Socket logic starts here																   */
 /***************************************************************************************** */
